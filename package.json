@@ -2,9 +2,9 @@
   "name": "sidechain-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon -r ./server.js",
+    "start": "nodemon -r ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
