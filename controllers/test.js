@@ -3,10 +3,11 @@ const { getDatabase } = require("../config/mongodb-config");
 class TestController {
     static async test(req, res, next) {
         try {
-            const client = getDatabase();
-            const data = await client.db().collection('users').find().toArray();
+            console.log(req)
+            // const client = getDatabase();
+            // const data = await client.db().collection('users').find().toArray();
 
-            return res.json(data);
+            return res.json(true);
         } catch (e) {
             next(e);
         }
