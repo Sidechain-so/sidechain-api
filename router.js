@@ -2,7 +2,7 @@ const TestController = require('./controllers/test');
 
 const router = require("express").Router();
 
-router.get(
+router.post(
     "/api/test",
     TestController.test
 );
