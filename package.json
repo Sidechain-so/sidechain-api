@@ -2,7 +2,7 @@
   "name": "sidechain-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon -r ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,6 @@
   "bugs": {
     "url": "https://github.com/Sidechain-so/sidechain-api/issues"
   },
-  "homepage": "https://github.com/Sidechain-so/sidechain-api#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
