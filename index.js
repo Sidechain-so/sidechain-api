@@ -3,12 +3,16 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const app = express();
+const bodyParser = require('body-parser');
 
 const port = process.env.PORT;
 
 const { mongoConnect } = require('./config/mongodb-config')
 
 const routers = require('./router');
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // mongodb connect
 mongoConnect();
