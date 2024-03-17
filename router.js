@@ -26,6 +26,7 @@ const {
     updateBounty,
     deleteBounty
 } = require('./controllers/Bounties');
+const { signUp, signIn, authenticateToken } = require('./controllers/Auth');
 
 const router = require("express").Router();
 
@@ -57,5 +58,8 @@ router.post("/api/bounties/:bountyId", createBounty);
 router.patch("/api/bounties/:bountyId", updateBounty);
 router.delete("/api/bounties/:bountyId", deleteBounty);
 
+// auth
+router.post("/api/auth/signUp", signUp);
+router.post("/api/auth/signIn", signIn);
 
 module.exports = router;

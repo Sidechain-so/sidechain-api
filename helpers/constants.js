@@ -3,6 +3,7 @@ const dbCollections = {
     COMPANIES: 'companies',
     JOBS: 'jobs',
     BOUNTIES: 'bounties',
+    USERS: 'users'
 }
 
 module.exports = {
