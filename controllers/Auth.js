@@ -9,12 +9,17 @@ const signUp = async (req, res, next) => {
         companyName,
         email,
         password,
-        twitterLink
+        telegram,
+        twitter
     } = req.body;
 
     try {
-        const companyObj = await fetchCompanyData(twitterLink);
+        const companyObj = await fetchCompanyData(twitter);
         
+        if (companyObj.error) {
+            return res.status(400).json(companyObj.error);
+        }
+
         const existingUser = await checkUserExist(email);
 
         if (existingUser.length > 0) {
@@ -47,7 +52,8 @@ const signUp = async (req, res, next) => {
                 },
                 usefulLinks: {
                     xLink: "",
-                    linkedIn: ""
+                    linkedIn: "",
+                    telegram: telegram
                 }   
             }
         }
@@ -74,7 +80,7 @@ const signIn = async (req, res, next) => {
             return res.status(401).json({ message: 'Invalid password' });
         }
         const token = jwt.sign({ userId: existingUser[0]._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        return res.status(200).json({ token });
+        return res.status(200).json({ token, userData: existingUser[0] });
     } catch (error) {
         console.error(error);
         next(error);
@@ -105,10 +111,10 @@ const checkUserExist = async (email) => {
     return existingUser;
 };
 
-const fetchCompanyData = async (twitterLink) => {
+const fetchCompanyData = async (twitter) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    
+    const twitterLink = `https://twitter.com/${twitter}`;
     try {
         await page.goto(twitterLink);
 
@@ -131,7 +137,7 @@ const fetchCompanyData = async (twitterLink) => {
             companyDesc: description
         };
     } catch (error) {
-        throw error;
+        return { error: { message: "Twitter account not found" } };;
     } finally {
         await browser.close();
     }
