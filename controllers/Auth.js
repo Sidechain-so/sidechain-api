@@ -129,12 +129,17 @@ const fetchCompanyData = async (twitter) => {
             return result;
         }, {});
 
-        const description = await page.$eval('[data-testid="UserDescription"]', element => element.textContent.trim());
+        let companyDesc;
+        try {
+          companyDesc = await page.$eval('[data-testid="UserDescription"]', element => element.textContent.trim());
+        } catch (error) {
+          companyDesc = '';
+        };
 
         return {
             companyAvatar: imgUrls.profile_banners,
             companyImage: imgUrls.profile_images,
-            companyDesc: description
+            companyDesc: companyDesc
         };
     } catch (error) {
         return { error: { message: "Twitter account not found" } };;

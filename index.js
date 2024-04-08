@@ -26,8 +26,8 @@ app.use(cors({
 app.use(routers);
 
 // server initialization
-http.createServer(app).listen("sidechain-api.vercel.app", () => {
-    console.log(`Server started at port ${'sidechain-api.vercel.app'}`)
+http.createServer(app).listen(port, () => {
+    console.log(`Server started at port ${port}`)
 })
 
 module.exports = app;
